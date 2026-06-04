@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jan Nogueira Acosta | Network Engineering Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes pulse-slow {
+
+            0%,
+            100% {
+                opacity: 0.15;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.25;
+                transform: scale(1.05);
+            }
+        }
+
+        .glow-bg {
+            animation: pulse-slow 10s infinite ease-in-out;
+        }
+
+        /* Custom scrollbar for tech aesthetics */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-950 text-slate-100 font-sans min-h-screen relative flex flex-col justify-between overflow-x-hidden selection:bg-indigo-500/30 selection:text-indigo-200">
+
+    <!-- Glowing Background Lights -->
+    <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none overflow-hidden z-0">
+        <div
+            class="absolute -top-[5%] left-[5%] w-[500px] h-[500px] rounded-full bg-indigo-600/10 blur-[120px] glow-bg">
+        </div>
+        <div class="absolute top-[35%] right-[2%] w-[450px] h-[450px] rounded-full bg-violet-600/10 blur-[130px] glow-bg"
+            style="animation-delay: 3s;"></div>
+        <div class="absolute bottom-[10%] left-[15%] w-[400px] h-[400px] rounded-full bg-emerald-600/5 blur-[100px] glow-bg"
+            style="animation-delay: 5s;"></div>
+    </div>
+
+    <!-- Toast Notification (Custom feedback wrapper) -->
+    <div id="toast"
+        class="fixed bottom-6 right-6 z-50 transform translate-y-10 opacity-0 pointer-events-none transition-all duration-300 bg-slate-900/95 border border-indigo-500/30 text-indigo-200 px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 backdrop-blur-md">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-400" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+        <span class="text-sm font-medium" id="toast-message">Copied to clipboard!</span>
+    </div>
+
+    <!-- Top Minimal Header -->
+    <header class="w-full max-w-6xl mx-auto px-6 pt-8 pb-4 relative z-10 flex justify-end items-center">
+        <div
+            class="text-xs text-slate-400 font-mono flex items-center gap-2 bg-slate-900/60 border border-slate-800/80 rounded-full px-3 py-1">
+            <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+            <span>Up to Date (June 4, 2026)</span>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main
+        class="w-full max-w-6xl mx-auto px-6 pt-4 pb-20 relative z-10 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- LEFT COLUMN: Profile Sidebar (4 Cols on Large Screens) -->
+        <section class="lg:col-span-4 flex flex-col space-y-6">
+
+            <!-- Main Hero Bio Card -->
+            <div
+                class="bg-slate-900/40 border border-slate-800/80 rounded-3xl p-6 backdrop-blur-md flex flex-col items-center text-center relative overflow-hidden group">
+                <div
+                    class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                </div>
+
+                <!-- Advanced Fail-Safe Avatar Section -->
+                <div
+                    class="relative w-28 h-28 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-emerald-500 p-[3px] shadow-2xl mb-5">
+                    <div
+                        class="w-full h-full rounded-full bg-slate-950 flex items-center justify-center overflow-hidden relative">
+                        <!-- Direct Link with No-Referrer bypass -->
+                        <img id="avatar-img"
+                            src="https://media.licdn.com/dms/image/v2/D4E03AQFpPTyv63CNnw/profile-displayphoto-crop_800_800/B4EZy.ec3WHMAI-/0/1772722180389?e=1782345600&v=beta&t=bP8NXGl-5BZWaEX5oiqvQuF_Dt4Ts4_zGRFubDHFkU8"
+                            alt="Jan Nogueira Acosta" class="w-full h-full rounded-full object-cover z-10 relative"
+                            referrerpolicy="no-referrer" onerror="handleAvatarError();">
+
+                        <!-- Beautiful, Designed Text Fallback hidden unless img fails -->
+                        <div id="avatar-fallback"
+                            class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950 z-0">
+                            <span
+                                class="text-3xl font-bold tracking-wider bg-gradient-to-r from-white via-indigo-200 to-purple-300 bg-clip-text text-transparent">JN</span>
+                            <span
+                                class="text-[9px] text-indigo-400/60 font-mono tracking-widest uppercase mt-0.5">Systems</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Identity Details -->
+                <h1
+                    class="text-2xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+                    Jan Nogueira Acosta
+                </h1>
+                <p class="text-indigo-400 font-mono text-xs mt-2 tracking-wider uppercase">
+                    Network Engineering Student
+                </p>
+                <p class="text-slate-400 text-xs mt-1 font-medium">
+                    Polytechnic University of Catalonia (UPC)
+                </p>
+
+                <!-- Location Badge -->
+                <div
+                    class="inline-flex items-center gap-1.5 bg-slate-950/60 border border-slate-800/50 rounded-full px-3 py-1 mt-4 text-xs text-slate-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-indigo-400" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span>Barcelona, Spain</span>
+                </div>
+            </div>
+
+            <!-- Contact Channels -->
+            <div class="bg-slate-900/40 border border-slate-800/50 rounded-3xl p-5 space-y-3 backdrop-blur-md">
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500 font-mono mb-2">// Contact
+                    Channels</h3>
+
+                <!-- Email (Domain) -->
+                <div
+                    class="flex items-center justify-between bg-slate-950/40 border border-slate-800/50 rounded-xl p-3 hover:border-indigo-500/40 transition-all group">
+                    <div class="flex items-center space-x-3 overflow-hidden">
+                        <div class="p-2 rounded-lg bg-indigo-950/30 text-indigo-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div class="truncate">
+                            <span class="block text-[10px] text-slate-500 font-mono uppercase">Primary Domain</span>
+                            <a href="mailto:web@jannogueira.com"
+                                class="text-xs font-mono text-slate-300 hover:text-white transition-colors truncate">web@jannogueira.com</a>
+                        </div>
+                    </div>
+                    <button onclick="copyText('web@jannogueira.com')"
+                        class="p-1 text-slate-600 hover:text-indigo-400 rounded transition-colors">
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Social Links Panel -->
+            <div class="bg-slate-900/40 border border-slate-800/50 rounded-3xl p-5 space-y-3 backdrop-blur-md">
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500 font-mono mb-2">// Network
+                    Credentials</h3>
+
+                <!-- LinkedIn Link -->
+                <a href="https://linkedin.com/in/jannogueira" target="_blank" rel="noopener noreferrer"
+                    class="flex items-center justify-between bg-slate-950/40 border border-slate-800/50 rounded-xl p-3 hover:border-blue-500/40 hover:bg-slate-900/40 transition-all group">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="p-2 rounded-lg bg-blue-950/20 text-blue-400 group-hover:bg-blue-950/50 transition-colors">
+                            <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-slate-500 font-mono uppercase">LinkedIn</span>
+                            <span class="text-xs font-mono text-slate-300 group-hover:text-white">/in/jannogueira</span>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 text-slate-600 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </a>
+
+                <!-- GitHub Link -->
+                <a href="https://github.com/Jannogueira" target="_blank" rel="noopener noreferrer"
+                    class="flex items-center justify-between bg-slate-950/40 border border-slate-800/50 rounded-xl p-3 hover:border-violet-500/40 hover:bg-slate-900/40 transition-all group">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="p-2 rounded-lg bg-violet-950/20 text-violet-400 group-hover:bg-violet-950/50 transition-colors">
+                            <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C19.138 20.193 22 16.44 22 12.017 22 6.484 17.522 2 12 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-slate-500 font-mono uppercase">GitHub Profile</span>
+                            <span class="text-xs font-mono text-slate-300 group-hover:text-white">/Jannogueira</span>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 text-slate-600 group-hover:text-violet-400 group-hover:translate-x-0.5 transition-all"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </a>
+
+                <!-- Instagram Link -->
+                <a href="https://instagram.com/jannogueira2" target="_blank" rel="noopener noreferrer"
+                    class="flex items-center justify-between bg-slate-950/40 border border-slate-800/50 rounded-xl p-3 hover:border-fuchsia-500/40 hover:bg-slate-900/40 transition-all group">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="p-2 rounded-lg bg-fuchsia-950/20 text-fuchsia-400 group-hover:bg-fuchsia-950/50 transition-colors">
+                            <svg class="h-4 w-4 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-slate-500 font-mono uppercase">Instagram</span>
+                            <span class="text-xs font-mono text-slate-300 group-hover:text-white">@jannogueira2</span>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 text-slate-600 group-hover:text-fuchsia-400 group-hover:translate-x-0.5 transition-all"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Spoken Languages Block -->
+            <div class="bg-slate-900/40 border border-slate-800/80 rounded-3xl p-5 backdrop-blur-md">
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500 font-mono mb-4">// Spoken
+                    Languages</h3>
+                <div class="space-y-3">
+                    <div>
+                        <div class="flex justify-between text-xs font-mono mb-1">
+                            <span class="text-slate-300">Spanish</span>
+                            <span class="text-indigo-400">Native</span>
+                        </div>
+                        <div class="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden border border-slate-800">
+                            <div class="bg-indigo-500 h-1.5 rounded-full" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-mono mb-1">
+                            <span class="text-slate-300">Catalan</span>
+                            <span class="text-indigo-400">Native</span>
+                        </div>
+                        <div class="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden border border-slate-800">
+                            <div class="bg-indigo-500 h-1.5 rounded-full" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-mono mb-1">
+                            <span class="text-slate-300">English</span>
+                            <span class="text-indigo-400">Professional (B2+)</span>
+                        </div>
+                        <div class="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden border border-slate-800">
+                            <div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-1.5 rounded-full"
+                                style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- RIGHT COLUMN: Professional Resume details (8 Cols on Large Screens) -->
+        <section class="lg:col-span-8 flex flex-col space-y-6">
+
+            <!-- Professional Profile -->
+            <div
+                class="bg-slate-900/40 border border-slate-800/80 rounded-3xl p-6 backdrop-blur-md relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 font-mono text-[9px] text-indigo-500/30">01 / PROFILE</div>
+                <h2 class="text-lg font-bold tracking-tight text-white mb-4 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-400" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span>Professional Profile</span>
+                </h2>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Final-year Network Engineering student at the <strong
+                        class="text-indigo-300 font-semibold">Polytechnic University of Catalonia (UPC)</strong>,
+                    possessing robust, comprehensive expertise in both software development and modern network
+                    infrastructure. Backed by a solid work history in demanding sectors like hospitality and retail, I
+                    have built a strong foundation in rapid adaptability, proactive communication, analytical diagnosis,
+                    and result-oriented incident resolution. I thrive under pressure, feel highly comfortable
+                    collaborating within agile teams, and take pride in achieving collective technological goals.
+                </p>
+            </div>
+
+            <!-- Education History -->
+            <div class="bg-slate-900/40 border border-slate-800/80 rounded-3xl p-6 backdrop-blur-md relative">
+                <div class="absolute top-0 right-0 p-4 font-mono text-[9px] text-indigo-500/30">02 / ACADEMICS</div>
+                <h2 class="text-lg font-bold tracking-tight text-white mb-6 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-400" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 14l9-5-9-5-9 5 9 5z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                    </svg>
+                    <span>Education</span>
+                </h2>
+                <div class="space-y-6 relative border-l border-slate-800 ml-3 pl-5">
+
+                    <!-- College -->
+                    <div class="relative">
+                        <!-- Bullet indicator -->
+                        <div
+                            class="absolute -left-[26px] top-1 w-3 h-3 rounded-full bg-indigo-500 ring-4 ring-slate-950">
+                        </div>
+                        <div class="flex justify-between items-start flex-wrap gap-2 mb-1">
+                            <h3 class="text-sm font-bold text-white">Bachelor's Degree in Network Engineering</h3>
+                            <span
+                                class="text-xs font-mono px-2.5 py-0.5 rounded-full bg-indigo-950/40 border border-indigo-900 text-indigo-300">Final
+                                Year</span>
+                        </div>
+                        <p class="text-xs text-indigo-400 font-medium">Universitat Politècnica de Catalunya (UPC)</p>
+                    </div>
+
+                    <!-- High School -->
+                    <div class="relative">
+                        <!-- Bullet indicator -->
+                        <div
+                            class="absolute -left-[26px] top-1 w-3 h-3 rounded-full bg-slate-700 ring-4 ring-slate-950">
+                        </div>
+                        <div class="flex justify-between items-start flex-wrap gap-2 mb-1">
+                            <h3 class="text-sm font-bold text-slate-300">Technology High School</h3>
+                            <span class="text-xs font-mono text-slate-500">2018 - 2020</span>
+                        </div>
+                        <p class="text-xs text-slate-500">Abat Oliba Spínola</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Skills & Tech Stack Grid (Highly polished, no-bloat layout) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <!-- Networking Stack Card -->
+                <div class="bg-slate-900/40 border border-slate-800/80 rounded-3xl p-5 backdrop-blur-md">
+                    <h3
+                        class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono mb-3 flex items-center gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-emerald-400" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        <span>Networking</span>
+                    </h3>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2.5 py-1 rounded-lg text-slate-300">Routing
+                            &amp; Switching</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2.5 py-1 rounded-lg text-slate-300">VLANs</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2.5 py-1 rounded-lg text-slate-300">VPN</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2.5 py-1 rounded-lg text-slate-300">Subnetting</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2.5 py-1 rounded-lg text-slate-300">Wireshark</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2.5 py-1 rounded-lg text-slate-300">GNS3</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2.5 py-1 rounded-lg text-slate-300">SSH
+                            &amp; Telnet</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2.5 py-1 rounded-lg text-slate-300">DNS
+                            &amp; DHCP</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2.5 py-1 rounded-lg text-slate-300">TCP/IP
+                            Protocol Suite</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2.5 py-1 rounded-lg text-slate-300">OSPF</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2.5 py-1 rounded-lg text-slate-300">BGP</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2.5 py-1 rounded-lg text-slate-300">RIP</span>
+                    </div>
+                </div>
+
+                <!-- Programming Stack Card -->
+                <div class="bg-slate-900/40 border border-slate-800/80 rounded-3xl p-5 backdrop-blur-md">
+                    <h3
+                        class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono mb-3 flex items-center gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-400" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        <span>Programming &amp; Software</span>
+                    </h3>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2 py-0.5 rounded-lg text-indigo-300">C</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2 py-0.5 rounded-lg text-indigo-300">C++</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2 py-0.5 rounded-lg text-indigo-300">C#</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2 py-0.5 rounded-lg text-indigo-300">Java</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2 py-0.5 rounded-lg text-slate-300">SQL</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2 py-0.5 rounded-lg text-slate-300">HTML5
+                            / CSS3</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2 py-0.5 rounded-lg text-slate-300">React
+                            &amp; Native</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2 py-0.5 rounded-lg text-slate-300">JS
+                            / TS</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2 py-0.5 rounded-lg text-slate-300">Angular</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2 py-0.5 rounded-lg text-slate-300">Flutter</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2 py-0.5 rounded-lg text-slate-300">MongoDB</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2 py-0.5 rounded-lg text-slate-300">JWT</span>
+                        <span
+                            class="text-xs font-mono bg-slate-950/60 border border-slate-800/60 px-2 py-0.5 rounded-lg text-slate-300">JSON</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Technical Projects Section -->
+            <div class="bg-slate-900/40 border border-slate-800/80 rounded-3xl p-6 backdrop-blur-md relative">
+                <div class="absolute top-0 right-0 p-4 font-mono text-[9px] text-indigo-500/30">03 / PROJECTS</div>
+                <h2 class="text-lg font-bold tracking-tight text-white mb-4 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-400" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                    </svg>
+                    <span>Technical &amp; Academic Projects</span>
+                </h2>
+                <div class="bg-slate-950/40 border border-slate-800/50 rounded-2xl p-5 space-y-4">
+                    <div class="flex justify-between items-start flex-wrap gap-2">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                            <span>Full-Stack &amp; Optimization Architectures</span>
+                        </h3>
+                        <span class="text-xs font-mono text-indigo-400">Academic / Personal</span>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Engineered various Backends and Frontends tailored for university and professional environments
+                        utilizing <strong class="text-indigo-300 font-semibold">C, C++, Java, and SQL</strong>, paired
+                        with cross-platform and client-side solutions using <strong
+                            class="text-indigo-300 font-semibold">React, Angular, and Flutter</strong>. All system
+                        integrations feature highly responsive web interfaces optimized through structured JSON
+                        exchange.
+                    </p>
+                    <div class="border-t border-slate-800/50 pt-3 mt-3">
+                        <span class="text-[10px] uppercase font-mono text-slate-500 block mb-1.5">Featured
+                            Solution</span>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Designed and deployed a customized browser extension designed for the visual optimization of
+                            the university's virtual campus platform. The system operates on a lightweight,
+                            high-performance dynamic CSS stylesheet-switching engine, significantly enhancing UX and
+                            loading speeds.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Work Experience Section -->
+            <div class="bg-slate-900/40 border border-slate-800/80 rounded-3xl p-6 backdrop-blur-md relative">
+                <div class="absolute top-0 right-0 p-4 font-mono text-[9px] text-indigo-500/30">04 / EXPERIENCES</div>
+                <h2 class="text-lg font-bold tracking-tight text-white mb-6 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-400" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <span>Professional Work History</span>
+                </h2>
+
+                <div class="space-y-6 relative border-l border-slate-800 ml-3 pl-5">
+
+                    <!-- Lonia STL -->
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[26px] top-1 w-3 h-3 rounded-full bg-indigo-500 ring-4 ring-slate-950">
+                        </div>
+                        <div class="flex justify-between items-start flex-wrap gap-2 mb-1">
+                            <h3 class="text-sm font-bold text-white">Sales Assistant</h3>
+                            <span
+                                class="text-xs font-mono px-2 py-0.5 rounded-full bg-indigo-950/30 border border-indigo-900 text-indigo-400">Dec.
+                                2022 - Present</span>
+                        </div>
+                        <p class="text-xs text-indigo-400/80 mb-2 font-medium">Sociedad Textil Lonia (STL)</p>
+                        <ul class="text-xs text-slate-400 space-y-1 list-disc list-inside">
+                            <li>Delivered tailored, premium personalized customer service under corporate guidelines.
+                            </li>
+                            <li>Executed precise inventory control, logistics management, and secure cash auditing.</li>
+                            <li>Collaborated within structured teams to systematically surpass sales milestones.</li>
+                        </ul>
+                    </div>
+
+                    <!-- La Guingueta -->
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[26px] top-1 w-3 h-3 rounded-full bg-slate-700 ring-4 ring-slate-950">
+                        </div>
+                        <div class="flex justify-between items-start flex-wrap gap-2 mb-1">
+                            <h3 class="text-sm font-bold text-slate-300">Entrepreneurship, Management &amp;
+                                Administration</h3>
+                            <span class="text-xs font-mono text-slate-500">Jun. 2023 - Sept. 2023</span>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-2 font-medium">La Guingueta de Planoles</p>
+                        <ul class="text-xs text-slate-400 space-y-1 list-disc list-inside">
+                            <li>Initiated, designed, and launched a localized hospitality business venture from scratch.
+                            </li>
+                            <li>Maintained comprehensive control over supplier logistics, customer service, and staff.
+                            </li>
+                            <li>Directed end-to-end economic, administrative, and regulatory operations.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Hospitality -->
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[26px] top-1 w-3 h-3 rounded-full bg-slate-700 ring-4 ring-slate-950">
+                        </div>
+                        <div class="flex justify-between items-start flex-wrap gap-2 mb-1">
+                            <h3 class="text-sm font-bold text-slate-300">Professional Waiter (Hospitality Sector)</h3>
+                            <span class="text-xs font-mono text-slate-500">Summers 2019 &amp; 2022</span>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-2 font-medium">El Glass Blanc Palamós &amp; El Casino de
+                            Planoles</p>
+                        <ul class="text-xs text-slate-400 space-y-1 list-disc list-inside">
+                            <li>Thrived under peak hours in fast-paced tourist locations, ensuring dynamic performance.
+                            </li>
+                            <li>Refined agile communication and stress management in direct client-facing environments.
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Soft Skills Bento Module -->
+            <div class="bg-slate-900/40 border border-slate-800/80 rounded-3xl p-6 backdrop-blur-md">
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500 font-mono mb-4">//
+                    Interpersonal &amp; Agile Strengths</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                    <div class="bg-slate-950/60 border border-slate-800/50 p-3 rounded-2xl text-center">
+                        <span class="block text-white text-xs font-semibold">Proactivity</span>
+                    </div>
+                    <div class="bg-slate-950/60 border border-slate-800/50 p-3 rounded-2xl text-center">
+                        <span class="block text-white text-xs font-semibold">Team Management</span>
+                    </div>
+                    <div class="bg-slate-950/60 border border-slate-800/50 p-3 rounded-2xl text-center">
+                        <span class="block text-white text-xs font-semibold">Analytical Skills</span>
+                    </div>
+                    <div class="bg-slate-950/60 border border-slate-800/50 p-3 rounded-2xl text-center">
+                        <span class="block text-white text-xs font-semibold">Adaptability</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-8 text-xs text-slate-600 font-mono relative z-10 border-t border-slate-900/50">
+        <div>&copy; 2026 Jan Nogueira Acosta. Network Engineering Student.</div>
+    </footer>
+
+    <!-- Logic and Interactions -->
+    <script>
+        // Copy to clipboard logic using document.execCommand fallback
+        function copyText(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast("Copied to clipboard!");
+            } catch (err) {
+                console.error('Copy failure: ', err);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // Show toast notifications
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = message;
+            toast.classList.remove('translate-y-10', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-10', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        // Handle Avatar Error seamlessly with a custom elegant CSS design
+        function handleAvatarError() {
+            const img = document.getElementById('avatar-img');
+            const fallback = document.getElementById('avatar-fallback');
+            if (img) img.style.display = 'none';
+            if (fallback) fallback.classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>
