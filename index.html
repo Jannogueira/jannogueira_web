@@ -12,6 +12,9 @@
     <meta name="author" content="Jan Nogueira Acosta">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://jannogueira.com/">
+    
+    <!-- Preload Critical LCP Image -->
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dtnjzhckg/image/upload/q_auto/f_auto/v1780592819/jan.jpg" fetchpriority="high">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="profile">
@@ -174,7 +177,7 @@
                         <img id="avatar-img"
                             src="https://res.cloudinary.com/dtnjzhckg/image/upload/q_auto/f_auto/v1780592819/jan.jpg"
                             alt="Jan Nogueira Acosta" class="w-full h-full rounded-full object-cover z-10 relative"
-                            referrerpolicy="no-referrer" onerror="handleAvatarError();">
+                            referrerpolicy="no-referrer" fetchpriority="high" onerror="handleAvatarError();">
 
                         <!-- Beautiful, Designed Text Fallback hidden unless img fails -->
                         <div id="avatar-fallback"
