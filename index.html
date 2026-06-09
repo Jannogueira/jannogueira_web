@@ -237,11 +237,11 @@
                         </div>
                         <div class="truncate">
                             <span class="block text-[10px] text-slate-500 font-mono uppercase">Primary Domain</span>
-                            <a href="mailto:web@jannogueira.com"
-                                class="text-xs font-mono text-slate-300 hover:text-white transition-colors truncate">web@jannogueira.com</a>
+                            <a id="email-link" href="#"
+                                class="text-xs font-mono text-slate-300 hover:text-white transition-colors truncate">Contact</a>
                         </div>
                     </div>
-                    <button onclick="copyText('web@jannogueira.com')"
+                    <button id="email-copy-btn"
                         class="flex items-center justify-center p-1.5 text-slate-600 hover:text-indigo-400 rounded-lg hover:bg-slate-800/40 transition-colors flex-shrink-0"
                         title="Copy email">
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -693,6 +693,24 @@
             if (img) img.style.display = 'none';
             if (fallback) fallback.classList.remove('hidden');
         }
+
+        // Email protection from spam bots (reconstructed dynamically)
+        document.addEventListener('DOMContentLoaded', () => {
+            const u = "web";
+            const d = "jannogueira.com";
+            const email = `${u}@${d}`;
+            
+            const link = document.getElementById('email-link');
+            const btn = document.getElementById('email-copy-btn');
+            
+            if (link) {
+                link.href = `mailto:${email}`;
+                link.textContent = email;
+            }
+            if (btn) {
+                btn.addEventListener('click', () => copyText(email));
+            }
+        });
     </script>
 </body>
 
