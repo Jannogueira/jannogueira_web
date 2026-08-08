@@ -1,0 +1,22 @@
+# Jan Nogueira Acosta - Personal & Professional Overview
+
+> Student of Telecommunications Systems Engineering at Universitat Politècnica de Catalunya (UPC), Barcelona. Focused on Network Engineering, Systems Administration, and Software Development.
+
+## Profile Summary
+- **Name**: Jan Nogueira Acosta
+- **Location**: Barcelona, Spain
+- **Education**: Telecommunications Systems Engineering, Universitat Politècnica de Catalunya (UPC)
+- **Role**: Network Engineering Student / SysAdmin / Software Developer
+- **Website**: https://jannogueira.com/
+- **GitHub**: https://github.com/Jannogueira
+- **LinkedIn**: https://linkedin.com/in/jannogueira
+
+## Core Skills & Technologies
+- **Networking**: Routing & Switching, TCP/IP, VLANs, Firewalls, Network Monitoring & Architecture
+- **Systems & Cloud**: Linux Administration, Server Maintenance, Virtualization, Cloud Infrastructure
+- **Software Development**: Python, JavaScript/TypeScript, HTML5, CSS3/Tailwind CSS, C/C++
+- **Languages**: Spanish, Catalan, English
+
+## Projects & Work
+- Portfolio: Clean static website built with HTML5, Tailwind CSS, structured JSON-LD data, and strict security headers.
+- Open Source & Academic Projects: Available on GitHub (https://github.com/Jannogueira).
